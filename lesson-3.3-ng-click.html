@@ -1,0 +1,72 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular.min.js"></script>
+
+    <style type="text/css">
+      .middle-true {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="search" ng-model="search">
+
+    <div ng-controller="List">
+      <ul>
+        <li ng-repeat="person in people | filter:search">
+          {{person.name}} | age: {{person.age}}
+          <button ng-click="remove($index)">x</button>
+          <span ng-show="$first">First!</span>
+          <span ng-show="$last">Last!</span>
+          <span ng-show="$middle" class="middle-{{$middle}}">Middle!</span>
+        </li>
+      </ul>
+
+      <br><br>
+      <span>There are {{people.length}} people in the list.</span>
+      <br><br>
+
+      <div>
+        <label>Name:</label>
+        <input type="text" ng-model="new_name">
+
+        <label>Age:</label>
+        <input type="number" ng-model="new_age">
+
+        <button ng-click="add()">Add</button>
+      </div>
+    </div>
+
+  </body>
+  <script type="text/javascript">
+    var List = function($scope){
+
+      $scope.people = [
+      {name: 'Eden', age: 20}
+      , {name: 'Talon', age: 30}
+      , {name: 'Jace', age: 20}
+      , {name: 'Cage', age: 40}
+      , {name: 'Dakota', age: 50}
+      , {name: 'Riot', age: 30}
+      , {name: 'River', age: 42}
+      , {name: 'Trent', age: 22}
+      , {name: 'Julian', age: 90}
+      ];
+
+      $scope.add = function(){
+        $scope.people.push({
+          name: $scope.new_name, age: $scope.new_age
+        })
+        $scope.new_name = "";
+        $scope.new_age = "";
+      }
+
+      $scope.remove = function(index){
+        $scope.people.splice(index, 1);
+      }
+    }
+
+
+  </script>
+</html>
