@@ -1,0 +1,32 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular.min.js"></script>
+
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+
+    <div class="browser" ng-controller="Browser">
+      <div class="url">
+        <label for="url">&rarr; &infin;</label>
+        <input value="edit/{{path}}" style="width: 400px;">
+      </div>
+
+      <div class="page">
+        <label>Update the url:</label> 
+         <input ng-change="clean()" ng-model="path" style="width: 400px;">
+      </div>
+    </div>
+
+  </body>
+  <script type="text/javascript">
+    var Browser = function($scope){
+      $scope.clean = function(){
+        //first part is supposed to replace spaces with dashes
+        $scope.path = $scope.path.replace(/\s+/, '-').replace(/[^a-z0-9-]/ig, '');
+      };
+    };
+  </script>
+</html>

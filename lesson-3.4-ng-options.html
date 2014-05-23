@@ -1,0 +1,37 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular.min.js"></script>
+
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+
+    <input type="input" ng-model="search">
+    <div ng-controller="Contacts">
+      <div class="url">
+        <select ng-model="selected_person" ng-options="person.name for person in people | filter:search">
+          <option value="">Choose a person</option>
+        </select>
+        {{selected_person.name}}
+      </div>
+
+      <div>
+        <label>Name:</label> <input ng-model="selected_person.name">
+        <label>Age:</label> <input ng-model="selected_person.age">
+      </div>
+    </div>
+
+  </body>
+  <script type="text/javascript">
+    var Contacts = function($scope){
+      $scope.people = [
+        {name: 'Goku', age: 17},
+        {name: 'Vegeta', age: 29},
+        {name: 'Chi Chi', age: 18},
+        {name: 'Bulma', age: 21}
+      ];
+    };
+  </script>
+</html>
