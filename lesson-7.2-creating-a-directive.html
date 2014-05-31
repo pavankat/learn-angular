@@ -9,18 +9,27 @@
   <body>
 
     <div ng-controller="Example">
-    	<button click="handler()">{{message}}</button>
+    	<!-- my-clicker refers to the myClicker directive
+    	- angular does this to allow you to pass elements through a validator -->
+
+			<!-- same goes for on-click 
+    	- it points to the onClick on line 32 -->
+    	<my-clicker on-click="handler()">{{message}}</my-clicker>
     </div>
 
   </body>
   <script type="text/javascript">
 	  angular.module('myApp', [])
-	  .directive('click', function() {
+	  .directive('myClicker', function() {
+	  	//transclude: true puts the message into the button
       return {
-      	restrict: 'A',
+      	restrict: 'E',
+      	replace: true,
+      	transclude: true,
+      	template: '<button ng-transclude></button>',
         link: function(scope, element, attrs){
         	element.bind('click', function() { 
-        		scope.$eval(attrs.click);
+        		scope.$eval(attrs.onClick);
         	});
         }
       };
