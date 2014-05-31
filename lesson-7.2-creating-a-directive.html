@@ -1,0 +1,38 @@
+<!doctype html>
+<html ng-app="myApp">
+  <head>
+    <script src="angular.min.js"></script>
+
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+
+    <div ng-controller="Example">
+    	<button click="handler()">{{message}}</button>
+    </div>
+
+  </body>
+  <script type="text/javascript">
+	  angular.module('myApp', [])
+	  .directive('click', function() {
+      return {
+      	restrict: 'A',
+        link: function(scope, element, attrs){
+        	element.bind('click', function() { 
+        		scope.$eval(attrs.click);
+        	});
+        }
+      };
+	  })
+	  .controller('Example', function($scope){ 
+	  	$scope.message = 'hey there';
+
+	    $scope.handler = function(){
+	    	alert( $scope.message );
+	    }
+
+	  });
+  </script>
+</html>
+
