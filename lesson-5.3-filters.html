@@ -1,0 +1,50 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <script src="angular.min.js"></script>
+
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+
+    <div ng-controller="Filter">
+    	<ul>
+	    	<li>{{price | currency}}</li>
+	    	<li>{{amount | number:6}}</li>
+	    	<li>{{message | uppercase}}</li>
+	    	<li>{{message | lowercase}}</li>
+	    	<li>{{date | date:'yyyy-MM-dd'}}</li>
+    	</ul>
+
+    	<ul>
+    		<li ng-repeat="name in names | limitTo:3">{{name}}</li>
+    	</ul>
+
+    	<ul>
+    		<li ng-repeat= "person in people | orderBy:'lastname'">{{person.firstname}}</li>
+    	</ul>
+    </div>
+
+  </body>
+  <script type="text/javascript">
+    var Filter = function($scope){
+    	$scope.price = 11.50;
+
+    	$scope.amount = 10.23243242333344;
+
+    	$scope.message = "Hello World!";
+
+    	$scope.date = new Date();
+
+    	$scope.names = ["Peter", "John", "Clark", "Logan", "Bruce", "Brook"];
+
+    	$scope.people = [
+    	{ firstname: "Tom", lastname: "Smithtower"}, { firstname: "Bob", lastname: "Pickens"}, { firstname: "Amy", lastname: "Trahousen"}, { firstname: "Joethalomus", lastname: "Lifebeam"}
+    	];
+
+
+    };
+  </script>
+</html>
+

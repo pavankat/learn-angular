@@ -1,0 +1,33 @@
+<!doctype html>
+<html ng-app="myApp">
+  <head>
+    <script src="angular.min.js"></script>
+
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+
+    <div ng-controller="Filter">
+    	<h1>{{text | clean:'**84'}}</h1>
+    </div>
+
+  </body>
+  <script type="text/javascript">
+	  angular.module('myApp', [])
+	  //the reason why these are created in two functions is because our filter may have dependencies and we have to request these using our outer function
+	  //for ex we may have a dependency on another filter
+	  .filter('clean', function(){
+	  	return function(input, separator){
+	  		var filter = new RegExp('[^a-z0-9' + (separator || '-') + ']', 'ig');
+	  		return input.toLowerCase()
+	  			.replace(/\s+/g, (separator || '-'))
+	  			.replace(filter,'');
+	  	};
+	  })
+	  .controller('Filter', function($scope){ 
+	    $scope.text = "Hello world, this is some text!"; 
+	  });
+  </script>
+</html>
+
